@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Chome Extension Boilerplate",
-  "description": "This is a boilerplate to get started with a Chrome extension",
+  "name": "Chome Contacts Extension",
+  "description": "General Assembly Chicago Contacts",
   "version": "1.0",
 
   "browser_action": {
