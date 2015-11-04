@@ -1,3 +1,4 @@
 .idea/.name
 *.iml
 .idea/misc.xml
+env.json
