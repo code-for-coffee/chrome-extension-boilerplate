@@ -13,10 +13,7 @@
             font-size: 100%;
         }
         #status {
-            /* avoid an excessively wide status text */
-            white-space: pre;
-            text-overflow: ellipsis;
-            max-width: 400px;
+            font-style: italic;
         }
         #wrapper {
           padding: 3px;
@@ -62,7 +59,10 @@
         <form id="input-form" action="" method="POST" target="no-target">
         </form>
 
+        <section id='status'></section>
+
     </div>
+
 
     <iframe src="#" id="no-target" name="no-target" style="visibility:hidden; display: none;"></iframe>
 

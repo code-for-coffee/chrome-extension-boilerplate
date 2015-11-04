@@ -37,28 +37,6 @@ chromeApp.saveUsername = function() {
     alert('Username saved.');
   });
 }
-chromeApp.googleFormIdCheck = function() {
-  chrome.storage.sync.get('google-form-id', function(value) {
-    if (!value) {
-      console.log('No google-form-id set. We\'ll fix that');
-      chromeApp.saveUsername();
-    }
-    console.log('google-form-id exists. we are all set.');
-    chromeApp.createSubmitButton()
-  });
-}
-chromeApp.saveGoogleFormId = function() {
-  var username = prompt("You have been provided a secret form ID. Copy and paste it here.");
-  if (!username) {
-    alert('Error: No google-form-id entered.');
-    chromeApp.saveGoogleFormId();
-  }
-  // Save it using the Chrome extension storage API.
-  chrome.storage.sync.set({'google-form-id': username}, function() {
-    // Notify that we saved.
-    alert('google-form-id saved.');
-  });
-}
 chromeApp.renderTextInput = function(id, querySelectorContainer, placeholderText, isHidden, value) {
   // rendundancy check
   if (document.getElementById(id) != null) return false;
@@ -99,13 +77,32 @@ chromeApp.renderSubmitButton = function(id, querySelectorContainer) {
 document.addEventListener('DOMContentLoaded', function() {
 
   var usernameObject = chromeApp.usernameCheck();
+  var form = document.getElementById('input-form');
+
 
   chromeApp.usernameCheck();
-  chromeApp.renderTextInput('entry.1806308001', document.getElementById('input-form'), 'Contact\'s Name');
-  chromeApp.renderTextInput('entry.7748266', document.getElementById('input-form'), 'Title / Position');
-  chromeApp.renderTextInput('entry.1882129234', document.getElementById('input-form'), 'Company');
-  chromeApp.renderTextInput('entry.1110567511', document.getElementById('input-form'), 'Email Address');
-  chromeApp.renderDropdown('entry_393917746', document.getElementById('input-form'), chromeApp.topics);
-  chromeApp.renderSubmitButton('form-submit', document.getElementById('input-form'));
+  chromeApp.renderTextInput('entry.1806308001', form, 'Contact\'s Name');
+  chromeApp.renderTextInput('entry.7748266', form, 'Title / Position');
+  chromeApp.renderTextInput('entry.1882129234', form, 'Company');
+  chromeApp.renderTextInput('entry.1110567511', form, 'Email Address');
+  chromeApp.renderDropdown('entry_393917746', form, chromeApp.topics);
+  chromeApp.renderSubmitButton('form-submit', form);
+
+  form.addEventListener('submit', function() {
+
+    var baseURL = 'https://docs.google.com/forms/d/1oF36C6kGAFCaMN7yV2uZYJLRLwfDUAOXPp7YmHrn8Iw/formResponse?';
+    var submitRef = '&submit=Submit';
+
+    var submitURL = (baseURL + 'entry.1806308001' + "=" + encodeURIComponent(document.getElementById('entry.1806308001').value) + "&" +
+                    'entry.7748266' + "=" + encodeURIComponent(document.getElementById('entry.7748266').value) + "&" +
+                    'entry.1882129234' + "=" + encodeURIComponent(document.getElementById('entry.1882129234').value) + "&" +
+                    'entry.1110567511' + "=" + encodeURIComponent(document.getElementById('entry.1110567511').value) + "&" +
+                    'entry_393917746' + "=" + encodeURIComponent(document.getElementById('entry_393917746').value) + "&" +
+                    'entry.2070097122' + "=" +encodeURIComponent( document.getElementById('entry.2070097122').value) + "&" +  submitRef);
+
+    console.log(submitURL);
+    this.action = submitURL;
+
+  });
 
 });
