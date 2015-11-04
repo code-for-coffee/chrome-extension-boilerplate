@@ -4,6 +4,7 @@
 
 var chromeApp = {} || new Object;
 chromeApp.topics = [
+  '-- Area of Engagement --',
   'Meet & Hire List',
   'Actively Hiring',
   'Interested in private hiring event',
@@ -35,6 +36,16 @@ chromeApp.saveUsername = function() {
     alert('Username saved.');
   });
 }
+chromeApp.renderTextInput = function(id, querySelectorContainer, placeholderText, isHidden) {
+  var textInput = document.createElement('input');
+  textInput.type = 'text';
+  textInput.id = id;
+  textInput.placeholder = placeholderText;
+  if (isHidden) {
+    textInput.type = 'hidden';
+  }
+  querySelectorContainer.appendChild(textInput);
+}
 chromeApp.renderDropdown = function(id, querySelectorContainer, listOfDropdownItems) {
   var dropdownObj = document.createElement('select');
   dropdownObj.id = id;
@@ -51,8 +62,12 @@ chromeApp.renderDropdown = function(id, querySelectorContainer, listOfDropdownIt
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    chromeApp.saveUsername('bob');
-
-    chromeApp.renderDropdown('contact-reason', document.getElementById('wrapper'), chromeApp.topics);
+    chromeApp.usernameCheck();
+    chromeApp.renderTextInput('entry.1806308001', document.getElementById('wrapper'), 'Contact\'s Name');
+    chromeApp.renderTextInput('entry.7748266', document.getElementById('wrapper'), 'Title / Position');
+    chromeApp.renderTextInput('entry.1882129234', document.getElementById('wrapper'), 'Company');
+    chromeApp.renderTextInput('entry.1110567511', document.getElementById('wrapper'), 'Email Address');
+    chromeApp.renderTextInput('entry.2070097122', document.getElementById('wrapper'), 'Submitted By', true);
+    chromeApp.renderDropdown('entry_393917746', document.getElementById('wrapper'), chromeApp.topics);
 
 });
