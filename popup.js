@@ -103,6 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(submitURL);
     this.action = submitURL;
 
+    document.getElementById('status').innerHTML = 'Thank you... you are wonderful!';
+    setTimeout(function() {
+      window.close();
+    }, 1000);
+
   });
 
 });
