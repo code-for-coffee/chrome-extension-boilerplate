@@ -22,7 +22,7 @@ chromeApp.usernameCheck = function() {
       chromeApp.saveUsername();
     }
     console.log('username exists. we are all set.');
-    chromeApp.renderTextInput('entry.2070097122', document.getElementById('wrapper'), 'Submitted By', true, value.username);
+  //  chromeApp.renderTextInput('entry.2070097122', document.getElementById('wrapper'), 'Submitted By', true, value.username);
   });
 }
 chromeApp.saveUsername = function() {
@@ -40,17 +40,26 @@ chromeApp.saveUsername = function() {
 chromeApp.renderTextInput = function(id, querySelectorContainer, placeholderText, isHidden, value) {
   // rendundancy check
   if (document.getElementById(id) != null) return false;
+  var label = document.createElement("label");
+  var div = document.createElement("div");
+  div.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
   var textInput = document.createElement('input');
   textInput.type = 'text';
   textInput.id = id;
-  textInput.placeholder = placeholderText;
+  //textInput.placeholder = placeholderText;
+  textInput.className = "mdl-textfield__input";
+  label.innerHTML = placeholderText;
+  label.className = "mdl-textfield__label";
+  label.htmlFor = textInput.id;
   if (isHidden) {
     textInput.type = 'hidden';
   }
   if (value) {
     textInput.value = value;
   }
-  querySelectorContainer.appendChild(textInput);
+  div.appendChild(label);
+  div.appendChild(textInput);
+  querySelectorContainer.appendChild(div);
   return true;
 }
 chromeApp.renderDropdown = function(id, querySelectorContainer, listOfDropdownItems) {
@@ -61,6 +70,7 @@ chromeApp.renderDropdown = function(id, querySelectorContainer, listOfDropdownIt
     option.value = listOfDropdownItems[i];
     option.text = listOfDropdownItems[i];
     dropdownObj.appendChild(option);
+    option.className = "option";
   }
   querySelectorContainer.appendChild(dropdownObj);
   return true;
@@ -70,6 +80,7 @@ chromeApp.renderSubmitButton = function(id, querySelectorContainer) {
   var btn = document.createElement('button');
   btn.id = id;
   btn.type = 'submit';
+  btn.className = "mdl-button mdl-js-button";
   btn.innerHTML = 'Submit Contact';
   querySelectorContainer.appendChild(btn);
 }
@@ -86,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
   chromeApp.renderTextInput('entry.1882129234', form, 'Company');
   chromeApp.renderTextInput('entry.1110567511', form, 'Email Address');
   chromeApp.renderDropdown('entry_393917746', form, chromeApp.topics);
-  chromeApp.renderSubmitButton('form-submit', form);
+  chromeApp.renderSubmitButton('form-submit', document.getElementById('submitcontainer'))
 
   form.addEventListener('submit', function() {
 

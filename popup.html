@@ -7,6 +7,8 @@
 <html>
 <head>
     <title>Chrome Extension Boilerplate</title>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.grey-pink.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         body {
             font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
@@ -16,28 +18,37 @@
             font-style: italic;
         }
         #wrapper {
-          padding: 3px;
+          padding: 20px;
           width: 200px;
           max-width: 300px;
         }
         h3 {
           margin-top: 10px;
-          margin-bottom: 10px;
+          margin-bottom: 25px;
+          font-weight: 700;
+          display: inline-block;
         }
         img {
-          max-width: 60px;
-          max-height: 60px;
+          max-width: 50px;
+          max-height: 50px;
           vertical-align: middle;;
         }
-        input,select,button {
-          width: 100%;
+        input,button {
+          width: 100%;/*
           border-radius: 2px;
           border: 1px solid black;
-          padding: 3px;
+          padding: 3px;*/
+        }
+        select{
+          width:100%;
+          margin: 10px 0;
         }
         strong {
           font-size: 32px;
         }
+#submitcontainer{
+  width: 100%;
+}
     </style>
 
     <!--
@@ -47,22 +58,21 @@
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
     <script src="popup.js"></script>
+    <script src="material.min.js"></script>
 </head>
 <body>
 
     <div id="wrapper">
         <!-- custom content here -->
 
-        <img src='https://avatars1.githubusercontent.com/u/12513784?v=3&s=200'> <strong>Contacts</strong>
-        <br>
+          <img src='https://avatars1.githubusercontent.com/u/12513784?v=3&s=200'>
+            <h3>Contacts</h3>
 
-        <form id="input-form" action="" method="POST" target="no-target">
-        </form>
+            <form id="input-form" action="" method="POST" target="no-target" ></form>
+          <section id='status'></section>
+        </div>
 
-        <section id='status'></section>
-
-    </div>
-
+        <div id="submitcontainer"></div>
 
     <iframe src="#" id="no-target" name="no-target" style="visibility:hidden; display: none;"></iframe>
 
